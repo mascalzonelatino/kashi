@@ -1,0 +1,2 @@
+kashi = angular.module('kashi',[
+])
