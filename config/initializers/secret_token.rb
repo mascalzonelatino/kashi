@@ -1,0 +1,1 @@
+Kashi::Application.config.secret_token = 'dee7d205f27b617bd0dc1b7eb412886971e97ba6ddd6d8896c75903eb9bde9ef740d697d382ef8554949ad81a6c202c48dca1653f215a57e2a1ca47cf5d81b25'
