@@ -1,6 +1,7 @@
 kashi = angular.module('kashi',[
   'templates',
   'ngRoute',
+  'ngResource',
   'controllers',
 ])
 
@@ -32,8 +33,8 @@ songs = [
   },
 ]
 controllers = angular.module('controllers',[])
-controllers.controller("SongsController", [ '$scope', '$routeParams', '$location',
-  ($scope,$routeParams,$location)->
+controllers.controller("SongsController", [ '$scope', '$routeParams', '$location', '$resource',
+  ($scope,$routeParams,$location,$resource)->    
     $scope.search = (keywords)->  $location.path("/").search('keywords',keywords)
 
     if $routeParams.keywords
