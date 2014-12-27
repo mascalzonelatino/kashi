@@ -39,4 +39,30 @@ describe SongsController do
     end
 
   end
+
+  describe "show" do
+    before do
+      xhr :get, :show, format: :json, id: song_id
+    end
+
+    subject(:results) { JSON.parse(response.body) }
+
+    context "when the song exists" do
+      let(:song) { 
+        Song.create!(name: 'Human Nature', 
+               lyrics: "Reaching out across the night time") 
+      }
+      let(:song_id) { song.id }
+
+      it { expect(response.status).to eq(200) }
+      it { expect(results["id"]).to eq(song.id) }
+      it { expect(results["name"]).to eq(song.name) }
+      it { expect(results["lyrics"]).to eq(song.lyrics) }
+    end
+
+    context "when the song doesn't exit" do
+      let(:song_id) { -9999 }
+      it { expect(response.status).to eq(404) }
+    end
+  end
 end

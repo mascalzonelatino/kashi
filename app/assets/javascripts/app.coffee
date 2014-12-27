@@ -3,6 +3,8 @@ kashi = angular.module('kashi',[
   'ngRoute',
   'ngResource',
   'controllers',
+  'angular-flash.service',
+  'angular-flash.flash-alert-directive'
 ])
 
 kashi.config([ '$routeProvider',
@@ -11,8 +13,11 @@ kashi.config([ '$routeProvider',
       .when('/',
         templateUrl: "index.html"
         controller: 'SongsController'
-      )
-])
+      ).when('/songs/:songId',
+         templateUrl: "show.html"
+         controller: 'SongController'
+ 	  ) 
+ ])
 
 songs = [
   {
