@@ -4,6 +4,7 @@ describe "SongController", ->
   routeParams  = null
   httpBackend  = null
   location     = null
+  flash        = null 
   songId     = 42
 
   fakeSong   =
@@ -12,12 +13,13 @@ describe "SongController", ->
     lyrics: "Reaching out across the night time"
 
   setupController =(songExists=true,songId=42)->
-    inject(($location, $routeParams, $rootScope, $httpBackend, $controller)->
+    inject(($location, $routeParams, $rootScope, $httpBackend, $controller, _flash_)->
       scope       = $rootScope.$new()
       location    = $location
       httpBackend = $httpBackend
       routeParams = $routeParams
       routeParams.songId = songId 
+      flash = _flash_
 
       if songId
         request = new RegExp("\/songs/#{songId}")
@@ -49,4 +51,4 @@ describe "SongController", ->
       it 'loads the given song', ->
         httpBackend.flush()
         expect(scope.song).toBe(null)
-        #what else?
+        expect(flash.error).toBe("There is no song with ID #{songId}")
