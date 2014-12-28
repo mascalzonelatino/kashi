@@ -8,4 +8,6 @@ controllers.controller("SongsController", [ '$scope', '$routeParams', '$location
       Song.query(keywords: $routeParams.keywords, (results)-> $scope.songs = results)
     else
       $scope.songs = []
+
+    $scope.view = (songId)-> $location.path("/songs/#{songId}")	
 ])

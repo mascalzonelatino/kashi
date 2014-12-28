@@ -10,5 +10,7 @@ controllers.controller("SongController", [ '$scope', '$routeParams', '$resource'
         flash.error   = "There is no song with ID #{$routeParams.songId}"
       )
     )
+
+    $scope.back = -> $location.path("/")
 ])
 
