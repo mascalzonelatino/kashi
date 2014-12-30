@@ -65,4 +65,41 @@ describe SongsController do
       it { expect(response.status).to eq(404) }
     end
   end
+  
+  describe "create" do
+    before do
+      xhr :post, :create, format: :json, song: { name: "Careless Whisper", 
+                                           lyrics: "I feel so unsure" }
+    end
+    it { expect(response.status).to eq(201) }
+    it { expect(Song.last.name).to eq("Careless Whisper") }
+    it { expect(Song.last.lyrics).to eq("I feel so unsure") }
+  end
+
+  describe "update" do
+    let(:song) { 
+      Song.create!(name: 'La Prima Estate', 
+                     lyrics: "La Prima Estate, tutti e due laureati") 
+    }
+    before do
+      xhr :put, :update, format: :json, id: song.id, song: { name: "Careless Whisper", 
+                                                 lyrics: "I feel so unsure" }
+      song.reload
+    end
+    it { expect(response.status).to eq(204) }
+    it { expect(song.name).to eq("Careless Whisper") }
+    it { expect(song.lyrics).to eq("I feel so unsure") }
+  end
+
+  describe "destroy" do
+    let(:song_id) { 
+      Song.create!(name: 'La Prima Estate', 
+                     lyrics: "La Prima Estate, tutti e due laureati").id
+    }
+    before do
+      xhr :delete, :destroy, format: :json, id: song_id
+    end
+    it { expect(response.status).to eq(204) }
+    it { expect(Song.find_by_id(song_id)).to be_nil }
+  end
 end

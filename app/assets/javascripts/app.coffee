@@ -19,10 +19,16 @@ kashi.config([ '$routeProvider', 'flashProvider',
       .when('/',
         templateUrl: "index.html"
         controller: 'SongsController'
-      ).when('/songs/:songId',
+      ).when('/songs/new',
+        templateUrl: "form.html"
+        controller: 'SongController'
+       ).when('/songs/:songId',
          templateUrl: "show.html"
          controller: 'SongController'
- 	  ) 
+      ).when('/songs/:songId/edit',
+        templateUrl: "form.html"
+        controller: 'SongController' 	  
+	  ) 
  ])
 
 songs = [

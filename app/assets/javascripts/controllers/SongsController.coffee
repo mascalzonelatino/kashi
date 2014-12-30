@@ -10,4 +10,8 @@ controllers.controller("SongsController", [ '$scope', '$routeParams', '$location
       $scope.songs = []
 
     $scope.view = (songId)-> $location.path("/songs/#{songId}")	
+
+    $scope.newSong = -> $location.path("/songs/new")
+    $scope.edit      = (songId)-> $location.path("/songs/#{songId}/edit")
+
 ])
